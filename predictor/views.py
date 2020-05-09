@@ -10,12 +10,18 @@ def index(request):
             form.save() 
             road_image = ('media/images/' + str(form.cleaned_data['road_image']))
             name = main(road_image)
-            return success(request, name) 
+            return success(request, name, str(form.cleaned_data['road_image'])) 
+
     else: 
         form = RoadForm() 
     return render(request, 'index.html', {'form' : form}) 
 
-def success(request, name): 
-    road_image_url = '/media/images/' + name
-    road = {'name' : name, 'road_image_url': road_image_url}
+def success(request, new_name, old_name): 
+    road_image_url = '/media/images/' + new_name
+    old_name = 'images/' + old_name
+    print(old_name)
+    r = Road.objects.get(road_image = old_name)
+    r.road_image_predicted = 'images/' + new_name
+    r.save()
+    road = {'name' : new_name, 'road_image_url': road_image_url}
     return render(request, 'display.html', {'road' : road}) 

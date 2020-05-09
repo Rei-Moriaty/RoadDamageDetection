@@ -1,12 +1,11 @@
-<html>
-    <head>
-        <title>Road Damage Prediction</title>
-    </head>
-    <body>
-        <form method = "post" enctype="multipart/form-data"> 
+{% extends 'base.html' %}
+{% block content %} 
+{% load static %}
+    <form method = "post" enctype="multipart/form-data">
+        <div class="form-group" style="display: flex; justify-content: center; flex-direction: column;">
             {% csrf_token %} 
             {{ form.as_p }} 
-            <button type="submit">Upload</button> 
-        </form> 
-    </body>
-</html>
+            <button class="btn btn-primary" type="submit">Upload</button> 
+        </div>
+    </form> 
+{% endblock content %}
