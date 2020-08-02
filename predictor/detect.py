@@ -28,10 +28,10 @@ def load_image_into_numpy_array(image):
 def main(image_url):
     # Path to frozen detection graph. This is the actual model that is used for the object detection.
     # PATH_TO_CKPT =  'trainedModels/ssd_mobilenet_RoadDamageDetector.pb' 
-    PATH_TO_CKPT =  'model/saved_model.pb'
+    PATH_TO_CKPT =  'model/sim.pb'
     # List of the strings that is used to add correct label for each box.
     # PATH_TO_LABELS = 'trainedModels/crack_label_map.pbtxt'
-    PATH_TO_LABELS = 'model/saved_model.pbtxt'
+    PATH_TO_LABELS = 'model/sim.pbtxt'
     NUM_CLASSES = 8
 
 
@@ -90,12 +90,19 @@ def main(image_url):
                 np.squeeze(classes).astype(np.int32),
                 np.squeeze(scores),
                 category_index,
-                min_score_thresh=0.3,
+                min_score_thresh=0.2,
                 use_normalized_coordinates=True,
                 line_thickness=8)
             plt.figure(figsize=IMAGE_SIZE)
             plt.imshow(image_np)
+            count = 0
+            print(scores)
+            print(classes)
+            for score in range(scores[0].shape[0]):
+                if(scores[0][score] > 0.2):
+                    print('s:', scores[0][score], 'damage: ', classes[0][score])
+                    count += 1
             name = image_url.split('/')[2].split('.')[0]
             name = name + '_predicted.png'
             plt.savefig('media/images/' + name )
-            return name
+            return (name, count)

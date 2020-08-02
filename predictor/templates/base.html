@@ -7,15 +7,30 @@
         </script> 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> 
         </script> 
+        {% load static %}
+        <style>
+            html, body{
+                margin: 0;
+                height: 100%;
+            }
+            body{
+                background: url("{% static 'images/userbg.jpeg' %}") top left no-repeat, url("{% static 'images/admin_bg.jpeg' %}") bottom right no-repeat;
+                background-size: 500px 500px, 500px 500px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+        </style>
     </head>
-    <body;>
+    <body>
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" style="display: flex; justify-content: center;">
                     <a class="navbar-brand" href="/"><i class="fa fa-home" style="font-size: xx-large;"></i></a>
                 </nav>
             </div>
-            <div class="row" style="display: flex; justify-content: center;">
+            <div class="row" style="display: flex; justify-content: center;"  id="form-section">
                 {% block content %}{% endblock %}
             </div>
         </div>
