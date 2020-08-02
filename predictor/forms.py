@@ -11,4 +11,4 @@ class RoadForm(forms.ModelForm):
             'location': forms.Textarea(attrs={'class': 'form-control', 'style' : 'resize: none'}),
             'road_image' : forms.FileInput(attrs={'class' : 'custom-file-input'})
         }
-        
+    
